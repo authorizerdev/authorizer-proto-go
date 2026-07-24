@@ -1,0 +1,25 @@
+version: v2
+# Generated stubs are rewritten to THIS module's import path so downstream Go
+# clients import github.com/authorizerdev/authorizer-proto-go/authorizer/v1.
+# google/api and buf/validate are NOT vendored here (no --include-imports): they
+# resolve from their published Go modules pinned in go.mod, matching how the
+# upstream server and authorizer-go already consume them.
+managed:
+  enabled: true
+  disable:
+    - module: buf.build/bufbuild/protovalidate
+      file_option: go_package_prefix
+    - module: buf.build/googleapis/googleapis
+      file_option: go_package_prefix
+  override:
+    - file_option: go_package_prefix
+      value: github.com/authorizerdev/authorizer-proto-go
+plugins:
+  - remote: buf.build/protocolbuffers/go:v1.35.2
+    out: .
+    opt: paths=source_relative
+  - remote: buf.build/grpc/go:v1.5.1
+    out: .
+    opt:
+      - paths=source_relative
+      - require_unimplemented_servers=false
